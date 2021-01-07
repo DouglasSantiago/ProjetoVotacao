@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="services/votacaoService.js"></script>
+    <script src="controllers/votacaoController.js"></script>
+    <link rel="stylesheet" type="text/css" href="votacaoEstilo.css">
+</head>
+
+<body ng-app="Legislapp" ng-controller="VotacaoController">
+    <h1>{{sessaoPlenaria.DataSessao | date:'dd/MM/yyyy'}}</h1>
+    <h1>{{materia.DescricaoIdentificacaoMateria}}</h1>
+    <ul>
+        <h1>VOTOS SIM</h1>
+        <div ng-repeat="voto in votacao.VotoParlamentar">
+            <li ng-if="voto.SiglaVoto == 'Sim'">
+                <span>{{voto.IdentificacaoParlamentar.NomeParlamentar}} - {{voto.IdentificacaoParlamentar.SiglaPartidoParlamentar}}/{{voto.IdentificacaoParlamentar.UfParlamentar}}</span>
+            </li>
+        </div>
+    </ul>
+    <ul>
+        <h1>VOTOS NAO</h1>
+        <div ng-repeat="voto in votacao.VotoParlamentar">
+            <li ng-if="voto.SiglaVoto == 'Não'">
+                <span>{{voto.IdentificacaoParlamentar.NomeParlamentar}} - {{voto.IdentificacaoParlamentar.SiglaPartidoParlamentar}}/{{voto.IdentificacaoParlamentar.UfParlamentar}}</span>
+            </li>
+        </div>
+    </ul>
+    <ul>
+        <h1>VOTOS NÃO CONTABILIZADOS</h1>
+        <div ng-repeat="voto in votacao.VotoParlamentar">
+            <li ng-if="voto.SiglaVoto != 'Não' && voto.SiglaVoto != 'Sim'">
+                <span>{{voto.IdentificacaoParlamentar.NomeParlamentar}} - {{voto.IdentificacaoParlamentar.SiglaPartidoParlamentar}}/{{voto.IdentificacaoParlamentar.UfParlamentar}}</span>
+                <p>{{voto.DescricaoVoto}}</p>
+            </li>
+        </div>
+    </ul>
+
+</body>
+
+</html>
